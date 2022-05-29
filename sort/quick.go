@@ -45,7 +45,9 @@ func partition(a []int, p int, r int) int {
 	for j := p; j < r; j++ {
 		// 从未处理区间中拿出一个元素a[j]与分区点比较，小于分区点，则应该在已处理区间，即与已处理区间尾部元素i交换
 		if a[j] < pivot {
-			a[i], a[j] = a[j], a[i]
+			if i != j {
+				a[i], a[j] = a[j], a[i]
+			}
 			// 已处理区间+1
 			i++
 		}
