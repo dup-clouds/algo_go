@@ -14,7 +14,7 @@ func main() {
 /**
 快速排序思路
 总体： 设排序数组下标p到r间的元素，选取一个分区点q,将小于q、大于q的元素分离,最后数组被分成三个部分(小于q、 q、大于q)
-	  利用分治、递归处理思想，分别将p~q-1、q+1~r的元素进行分区，知道元素至少一个未知
+	  利用分治、递归处理思想，分别将p~q-1、q+1~r的元素进行分区，直到元素为一个为止
 递归公式：quicksort(p, r) = quicksort(p, q-1) + quicksort(q+1, r)
 终止条件：p >= r
 步骤：
@@ -45,19 +45,13 @@ func partition(a []int, p int, r int) int {
 	for j := p; j < r; j++ {
 		// 从未处理区间中拿出一个元素a[j]与分区点比较，小于分区点，则应该在已处理区间，即与已处理区间尾部元素i交换
 		if a[j] < pivot {
-			swap(a, i, j)
+			a[i], a[j] = a[j], a[i]
 			// 已处理区间+1
 			i++
 		}
 	}
 	// 分区点与已处理区间交换
-	swap(a, i, r)
+	a[i], a[r] = a[r], a[i]
 	// 返回分区点下标
 	return i
-}
-
-func swap(a []int, i int, j int) {
-	temp := a[i]
-	a[i] = a[j]
-	a[j] = temp
 }

@@ -16,7 +16,7 @@ func bubble(a []int, n int) {
 		flag := false
 		for j := 0; j < n-i-1; j++ {
 			if a[j] > a[j+1] {
-				swapBubble(a, j, j+1)
+				a[j], a[j+1] = a[j+1], a[j]
 				flag = true
 			}
 		}
@@ -24,10 +24,4 @@ func bubble(a []int, n int) {
 			return
 		}
 	}
-}
-
-func swapBubble(a []int, i int, j int) {
-	temp := a[i]
-	a[i] = a[j]
-	a[j] = temp
 }

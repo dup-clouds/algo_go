@@ -23,11 +23,6 @@ func selectSort(a []int, n int) {
 				minVal = a[j]
 			}
 		}
-		swapSelect(a, i, minIndex)
+		a[i], a[minIndex] = a[minIndex], a[i]
 	}
-}
-func swapSelect(a []int, i int, j int) {
-	temp := a[i]
-	a[i] = a[j]
-	a[j] = temp
 }
