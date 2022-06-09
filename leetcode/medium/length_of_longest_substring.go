@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	fmt.Println()
-	fmt.Println(lengthOfLongestSubstring("bbtablud"))
+	fmt.Println(lengthOfLongestSubstringLast("bbtablud"))
 }
 
 /**
@@ -41,4 +41,44 @@ func lengthOfLongestSubstring(s string) int {
 		set = make(map[string]int)
 	}
 	return len(max)
+}
+
+/**
+核心思想：
+max： 记录最大值，初始为0，每次滑动窗口时与r-i+1比较
+i： 每次滑动窗口的步长
+r： 作为一个右指针，从-1开始，不断叠加，不会重置，直达r+1=len(s)
+每滑动一个窗口，则删除之前滑动过的元素，即当前滑动窗口初始下标-1
+map存储的为每次滑动窗口不重复的字符，滑动时进行删除第一个元素
+*/
+func lengthOfLongestSubstringLast(s string) int {
+	// 散列表 存储当前枚举值
+	m := make(map[byte]int)
+	//
+	r, maxCount := -1, 0
+	// 滑动窗口起始位置
+	for i := 0; i < len(s); i++ {
+		// 删除窗口左边的元素，每次i+1则从头开始删除一个
+		if i != 0 {
+			delete(m, s[i-1])
+		}
+		// 右指针小于s长度且对应s在map中无值时
+		for r+1 < len(s) && m[s[r+1]] < 1 {
+			m[s[r+1]]++
+			r++
+		}
+		// 如果r已将整个串遍历完成并放入map中，则判断最大长度与当前i到len的长度，如果小于max，则无需后续滑动遍历
+		if r+1 == len(s) && r-i+1 < maxCount {
+			break
+		}
+		maxCount = max(maxCount, r-i+1)
+	}
+	return maxCount
+}
+
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
 }
