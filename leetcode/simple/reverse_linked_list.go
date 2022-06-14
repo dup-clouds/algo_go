@@ -4,9 +4,9 @@ import "fmt"
 
 func main() {
 	head := &ListNodeRevers{1, &ListNodeRevers{2, &ListNodeRevers{4, nil}}}
-	res := reverseList(head)
-	fmt.Println()
-	printRevers(res)
+	res := reverseListLast(head)
+	fmt.Println(res)
+	//printRevers(res)
 }
 
 type ListNodeRevers struct {
@@ -32,4 +32,14 @@ func reverseList(head *ListNodeRevers) *ListNodeRevers {
 		curr = next
 	}
 	return prev
+}
+
+func reverseListLast(head *ListNodeRevers) *ListNodeRevers {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	ret := reverseListLast(head.Next)
+	head.Next.Next = head
+	head.Next = nil
+	return ret
 }
