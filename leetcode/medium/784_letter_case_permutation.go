@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 func main() {
@@ -22,13 +21,19 @@ func letterCasePermutation(s string) []string {
 		temp := string(str)
 		ansPer = append(ansPer, temp)
 		for i := index; i < len(str); i++ {
-			_, err := strconv.ParseFloat(string(str[i]), 64)
-			if err == nil {
+			if str[i] > 47 && str[i] < 58 {
 				continue
 			}
-			str[i] -= 32
-			dfs(str, index+1)
-			str[i] += 32
+			if str[i] > 64 && str[i] < 91 {
+				str[i] += 32
+				dfs(str, i+1)
+				str[i] -= 32
+			} else {
+				str[i] -= 32
+				dfs(str, i+1)
+				str[i] += 32
+			}
+
 		}
 	}
 	dfs([]byte(s), 0)
