@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(fib(100))
+	fmt.Println(fib1(10))
 }
 
 /**
@@ -20,4 +20,34 @@ func fib(n int) int {
 		mem[i] = mem[i-1] + mem[i-2]
 	}
 	return mem[n]
+}
+
+func fib1(n int) int {
+	mem := make(map[int]int)
+	return fibRec(n, &mem)
+}
+func fibRec(n int, mem *map[int]int) int {
+	if (*mem)[n] > 0 {
+		return (*mem)[n]
+	}
+	if n < 2 {
+		return n
+	}
+	res := fibRec(n-1, mem) + fibRec(n-2, mem)
+	(*mem)[n] = res
+	return res
+}
+
+func fib3(n int) int {
+	if n < 2 {
+		return n
+	}
+	prev := 0
+	curr := 1
+	for i := 2; i <= n; i++ {
+		sum := prev + curr
+		prev = curr
+		curr = sum
+	}
+	return curr
 }
