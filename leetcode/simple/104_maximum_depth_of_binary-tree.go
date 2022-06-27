@@ -6,7 +6,7 @@ func main() {
 	left := TreeNode1{9, nil, nil}
 	right := TreeNode1{20, &TreeNode1{15, nil, nil}, &TreeNode1{7, nil, nil}}
 	root := &TreeNode1{3, &left, &right}
-	fmt.Println(maxDepth(root))
+	fmt.Println(maxDepth1(root))
 }
 
 type TreeNode1 struct {
@@ -40,4 +40,14 @@ func maxVal(x, y int) int {
 		return x
 	}
 	return y
+}
+
+func maxDepth1(root *TreeNode1) int {
+	if root == nil {
+		return 0
+	}
+	maxLeft := maxDepth1(root.Left)
+	maxRight := maxDepth1(root.Right)
+	res := maxVal(maxLeft, maxRight) + 1
+	return res
 }
