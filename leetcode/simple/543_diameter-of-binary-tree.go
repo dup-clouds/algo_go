@@ -29,9 +29,13 @@ func maxDepthDiameter(root *TreeNode2, max *int) int {
 	if root == nil {
 		return 0
 	}
+	// 递归求解左子树最深度
 	left := maxDepthDiameter(root.Left, max)
+	// 递归求解又子树最深度
 	right := maxDepthDiameter(root.Right, max)
+	// 左右子树最大深度相加与最大值max取相对大小值 更新最大直径
 	*max = maxDiameter(*max, left+right)
+	// 返回当前节点最大深度，左右子树最大深度值+1
 	return 1 + maxDiameter(left, right)
 
 }
