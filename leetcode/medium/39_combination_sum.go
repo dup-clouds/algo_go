@@ -1,9 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
-	candidates := []int{2, 3, 5}
+	candidates := []int{5, 3, 2}
 	fmt.Println(combinationSum(candidates, 8))
 }
 
@@ -14,6 +17,7 @@ func main() {
 func combinationSum(candidates []int, target int) [][]int {
 	var res [][]int
 	var path []int
+	sort.Ints(candidates)
 	backtrack(candidates, path, &res, target, 0, 0)
 	return res
 }
@@ -41,7 +45,7 @@ func backtrack(candidates []int, path []int, res *[][]int, target int, sum int, 
 	// 遍历选择 从start开始，避免往前选择，造成重复数据
 	for i := start; i < len(candidates); i++ {
 		if candidates[i]+sum > target {
-			continue
+			break
 		}
 		// 做选择
 		path = append(path, candidates[i])
