@@ -1,11 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	head1 := &ListNodeMerge{1, &ListNodeMerge{2, &ListNodeMerge{4, nil}}}
-	head2 := &ListNodeMerge{1, &ListNodeMerge{3, &ListNodeMerge{4, nil}}}
-	res := mergeTwoListsLast(head1, head2)
+	head2 := &ListNodeMerge{1, &ListNodeMerge{3, &ListNodeMerge{5, nil}}}
+	res := mergeTwoLists(head1, head2)
 	fmt.Println()
 	printRes(res)
 }
@@ -28,24 +30,24 @@ func printRes(res *ListNodeMerge) {
 @link https://leetcode.cn/problems/merge-two-sorted-lists/
 */
 func mergeTwoLists(list1 *ListNodeMerge, list2 *ListNodeMerge) *ListNodeMerge {
-	preHead := ListNodeMerge{-1, nil}
-	prev := &preHead
+	preHead := &ListNodeMerge{-1, nil}
+	ret := preHead
 	for list1 != nil && list2 != nil {
 		if list1.Val <= list2.Val {
-			prev.Next = list1
+			preHead.Next = list1
 			list1 = list1.Next
 		} else {
-			prev.Next = list2
+			preHead.Next = list2
 			list2 = list2.Next
 		}
-		prev = prev.Next
+		preHead = preHead.Next
 	}
 	if list1 == nil {
-		prev.Next = list2
+		preHead.Next = list2
 	} else {
-		prev.Next = list1
+		preHead.Next = list1
 	}
-	return preHead.Next
+	return ret.Next
 }
 
 /**
