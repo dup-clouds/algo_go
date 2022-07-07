@@ -7,13 +7,15 @@ import (
 func main() {
 	head := ListNode{Val: 1, Next: &ListNode{Val: 2, Next: &ListNode{Val: 3, Next: &ListNode{Val: 4, Next: &ListNode{Val: 5, Next: nil}}}}}
 	fmt.Println()
-	newHead := removeNthFromEndLast(&head, 1)
+	newHead := removeNthFromEnd20220707(&head, 1)
 	curr := newHead
 	for curr != nil {
 		fmt.Println(curr.Val)
 		curr = curr.Next
 	}
 	fmt.Println()
+
+	fmt.Println(findNthNode(&head, 2+1).Val)
 }
 
 type ListNode struct {
@@ -75,4 +77,30 @@ func removeNthFromEndLast(head *ListNode, n int) *ListNode {
 	second.Next = second.Next.Next
 	// 返回节点
 	return dummy.Next
+}
+
+/*
+策略：
+1. 先查找第n+1个节点
+2. 修改第n+1个节点的next指针
+注意：删除最后一个节点时容易引起nil问题，故需放置一个dummy节点
+*/
+func removeNthFromEnd20220707(head *ListNode, n int) *ListNode {
+	dummyNode := ListNode{-1, head}
+	temp := findNthNode(&dummyNode, n+1)
+	temp.Next = temp.Next.Next
+	return dummyNode.Next
+}
+
+func findNthNode(head *ListNode, k int) *ListNode {
+	p1 := head
+	for i := 0; i < k; i++ {
+		p1 = p1.Next
+	}
+	p2 := head
+	for p1 != nil {
+		p2 = p2.Next
+		p1 = p1.Next
+	}
+	return p2
 }
