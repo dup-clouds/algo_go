@@ -10,7 +10,7 @@ func main() {
 	//	fmt.Println(curr.Val)
 	//	curr = curr.Next
 	//}
-	fmt.Println(middleNode(&head).Val)
+	fmt.Println(middleNode1(&head).Val)
 	fmt.Println()
 }
 
@@ -40,4 +40,17 @@ func middleNode(head *ListNode) *ListNode {
 		nextNextNode = nextNextNode.Next.Next
 	}
 	return nextNode
+}
+
+func middleNode1(head *ListNode) *ListNode {
+	if nil == head {
+		return nil
+	}
+	slow := head
+	fast := head
+	for nil != fast && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+	return slow
 }
