@@ -3,10 +3,11 @@ package main
 import "fmt"
 
 func main() {
-	head := &ListNodeRevers{1, &ListNodeRevers{2, &ListNodeRevers{4, nil}}}
+	head := &ListNodeRevers{1, &ListNodeRevers{2,
+		&ListNodeRevers{3,
+			&ListNodeRevers{4, &ListNodeRevers{5, nil}}}}}
 	res := reverseList3(head)
 	fmt.Println()
-	fmt.Println(res)
 	printRevers(res)
 }
 
@@ -19,7 +20,7 @@ func printRevers(res *ListNodeRevers) {
 	for res == nil {
 		return
 	}
-	fmt.Println(res.Val)
+	fmt.Print(res.Val)
 	printRevers(res.Next)
 }
 
@@ -79,5 +80,7 @@ func reverseList3(head *ListNodeRevers) *ListNodeRevers {
 	head.Next.Next = head
 	// 将当前节点的next节点指向空节点
 	head.Next = nil
+	printRevers(last)
+	fmt.Println()
 	return last
 }
