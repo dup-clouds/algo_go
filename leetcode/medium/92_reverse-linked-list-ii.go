@@ -1,12 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	head := &ListNodeReverseBetween{1, &ListNodeReverseBetween{2,
-		&ListNodeReverseBetween{3,
-			&ListNodeReverseBetween{4, &ListNodeReverseBetween{5, nil}}}}}
-	res := reverseBetween(head, 2, 4)
+	head := &ListNodeReverseBetween{1,
+		&ListNodeReverseBetween{2,
+			&ListNodeReverseBetween{3,
+				&ListNodeReverseBetween{4,
+					&ListNodeReverseBetween{5,
+						&ListNodeReverseBetween{6,
+							&ListNodeReverseBetween{7, nil}}}}}}}
+	res := reverseBetween2(head, 3, 5)
+	//res := reverse1(head)
 	fmt.Println()
 	printRevers(res)
 }
@@ -64,4 +71,57 @@ func reverseN(head *ListNodeReverseBetween, n int) *ListNodeReverseBetween {
 	}
 
 	return fun(head, n)
+}
+
+// 使用迭代实现反转指定区间的链表 1 2 3 4 5 6 7
+func reverseBetween2(head *ListNodeReverseBetween, left int, right int) *ListNodeReverseBetween {
+	// 设置虚拟头结点 -1 1 2 3 4 5 6 7
+	dummy := &ListNodeReverseBetween{-1, head}
+	// 操作节点pre
+	pre := dummy
+	// 寻找left-1位置节点
+	for i := 0; i < left-1; i++ {
+		pre = pre.Next
+	}
+	// 寻找有边界节点 2 3 4 5 6 7->5 6 7
+	rightNode := pre
+	for i := 0; i < right-left+1; i++ {
+		rightNode = rightNode.Next
+	}
+	// 左边界节点赋值 2 3 4 5 6 7
+	leftNode := pre.Next
+	// 有边界节点的下一个节点赋值  6 7
+	curr := rightNode.Next
+
+	// 截取需要反转链表的头结点 -1 1 2 nil
+	pre.Next = nil
+	// 截取需要反转链表的尾结点 3 4 5 nil
+	rightNode.Next = nil
+
+	// 反转left-right节点 5 4 3
+	reverse1(leftNode)
+
+	// 拼接链表，进行还原 12 543 67
+	pre.Next = rightNode
+	leftNode.Next = curr
+
+	// 返回已处理链表
+	return dummy.Next
+}
+
+func reverse1(head *ListNodeReverseBetween) *ListNodeReverseBetween {
+	// 定义前驱节点，默认为nil
+	var prev *ListNodeReverseBetween
+	// 遍历整个链表
+	for head != nil {
+		// 保存next指针
+		next := head.Next
+		// 对当前节点的next赋值给前驱节点
+		head.Next = prev
+		// 更新前驱节点
+		prev = head
+		// 更新当前节点为下一个节点
+		head = next
+	}
+	return prev
 }
