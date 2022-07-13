@@ -40,7 +40,7 @@ func reverseBetween(head *ListNodeReverseBetween, left int, right int) *ListNode
 		return reverseN(head, right)
 	}
 
-	head.Next = reverseBetween(head.Next, left-1, right-1)
+	head.Next = reverseBetween3(head.Next, left-1, right-1)
 	//printRevers(head)
 	fmt.Println()
 	return head
@@ -124,4 +124,31 @@ func reverse1(head *ListNodeReverseBetween) *ListNodeReverseBetween {
 		head = next
 	}
 	return prev
+}
+
+// head: 1 2 3 4 5 6 7 left: 3 right: 5
+func reverseBetween3(head *ListNodeReverseBetween, left int, right int) *ListNodeReverseBetween {
+	// 虚拟头结点
+	dummy := &ListNodeReverseBetween{-1, head}
+	// 操作节点
+	pre := dummy
+	// 寻找left-1位置的节点
+	for i := 0; i < left-1; i++ {
+		pre = pre.Next
+	}
+	// left位置节点 3 4 5 6 7
+	curr := pre.Next
+	// 遍历left-right-1位置节点
+	for i := 0; i < right-left; i++ {
+		// 临时保存当前节点下一个节点 4 5 6 7
+		next := curr.Next
+		// 设置当前节点下一个节点为下下个节点 4 6 7
+		curr.Next = next.Next
+		// 设置下一个节点的后一个节点为前置节点的后一个节点 5 4 6 7
+		next.Next = pre.Next
+		// 设置前置节点后一个节点为当前节点的后一个节点 3 5 4 6 7
+		pre.Next = next
+	}
+	// 1 2 5 4 3 6 7
+	return dummy.Next
 }
