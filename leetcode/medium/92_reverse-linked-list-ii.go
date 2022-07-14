@@ -31,7 +31,7 @@ type ListNodeReverseBetween struct {
 }
 
 /**
-@Link https://leetcode.cn/problems/reverse-linked-list-ii/
+@link https://leetcode.cn/problems/reverse-linked-list-ii/
 反转left到right之间的链表
 */
 func reverseBetween(head *ListNodeReverseBetween, left int, right int) *ListNodeReverseBetween {
@@ -138,7 +138,7 @@ func reverseBetween3(head *ListNodeReverseBetween, left int, right int) *ListNod
 	}
 	// left位置节点 3 4 5 6 7
 	curr := pre.Next
-	// 遍历left-right-1位置节点
+	// 遍历left~right-1位置节点
 	for i := 0; i < right-left; i++ {
 		// 临时保存当前节点下一个节点 4 5 6 7
 		next := curr.Next
