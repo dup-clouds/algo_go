@@ -1,4 +1,4 @@
-# [23. longest_palindromic_substring](https://leetcode.cn/problems/longest-palindromic-substring/)
+# [5. longest_palindromic_substring](https://leetcode.cn/problems/longest-palindromic-substring/)
 
 ## 题目
 
