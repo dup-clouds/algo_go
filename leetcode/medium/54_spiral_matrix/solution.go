@@ -52,3 +52,44 @@ func spiralOrder(matrix [][]int) []int {
 	}
 	return ret
 }
+
+func spiralOrder2(matrix [][]int) []int {
+	m := len(matrix)
+	n := len(matrix[0])
+	ret := make([]int, m*n)
+	// ret数组索引维护
+	index := 0
+	// 左上
+	top := 0
+	left := 0
+	// 右下
+	right := n - 1
+	bottom := m - 1
+
+	for left <= right && top <= bottom {
+		for column := left; column <= right; column++ {
+			ret[index] = matrix[top][column]
+			index++
+		}
+		for row := top + 1; row <= bottom; row++ {
+			ret[index] = matrix[row][right]
+			index++
+		}
+		// 防止单行层级遍历越界
+		if left < right && top < bottom {
+			for column := right - 1; column >= left; column-- {
+				ret[index] = matrix[bottom][column]
+				index++
+			}
+			for row := bottom - 1; row > top; row-- {
+				ret[index] = matrix[row][left]
+				index++
+			}
+		}
+		left++
+		top++
+		bottom--
+		right--
+	}
+	return ret
+}
