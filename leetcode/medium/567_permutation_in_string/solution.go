@@ -29,7 +29,7 @@ func checkInclusion(s1 string, s2 string) bool {
 			}
 		}
 		// 当窗口字符串长度等于目标字符串长度时进行判断有效性
-		for len(s1) == right-left {
+		if len(s1) == right-left {
 			// 判断有效性
 			if valid == len(needMap) {
 				return true

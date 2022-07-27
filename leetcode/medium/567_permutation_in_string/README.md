@@ -27,6 +27,9 @@
 
 **方法一：**
 1. 构建目标字符串map-needMap，构建窗口字符串map-windowsMap
-2. 定义左边界left、有边界right，遍历right
-3. 判断needMap大小是否等于windowsMap
-4. 确保windowsMap的连续性，如不存在连续性则移动左边界left
+2. 定义左边界left、有边界right，遍历right，valid-标识有效匹配个数
+3. 循环遍历给定字符串
+4. 对应判断是否添加如windowsMap中，valid对应更新
+5. 判断left-right边界大小是否等于目标字符串大小
+6. 满足5时，判断valid值是否等于needMap大小，等于则说明成立
+7. 在6中不成立时，进行left后移，同时判断left位置元素是否为needMap中，同时对valid+windowsMap进行更新
