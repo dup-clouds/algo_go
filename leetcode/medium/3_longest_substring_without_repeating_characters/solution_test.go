@@ -11,3 +11,17 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 	ast.Equal(1, lengthOfLongestSubstring("bbbbb"))
 	ast.Equal(3, lengthOfLongestSubstring("pwwkew"))
 }
+
+func TestLengthOfLongestSubstring2(t *testing.T) {
+	ast := assert.New(t)
+	ast.Equal(3, lengthOfLongestSubstring2("abcabcbb"))
+	ast.Equal(1, lengthOfLongestSubstring2("bbbbb"))
+	ast.Equal(3, lengthOfLongestSubstring2("pwwkew"))
+}
+
+func TestLengthOfLongestSubstring3(t *testing.T) {
+	ast := assert.New(t)
+	ast.Equal(3, lengthOfLongestSubstring3("abcabcbb"))
+	ast.Equal(1, lengthOfLongestSubstring3("bbbbb"))
+	ast.Equal(3, lengthOfLongestSubstring3("pwwkew"))
+}
