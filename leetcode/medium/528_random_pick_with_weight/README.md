@@ -1,4 +1,4 @@
-# [528. permutation-in-string](https://leetcode.cn/problems/random-pick-with-weight/)
+# [528. random-pick-with-weight](https://leetcode.cn/problems/random-pick-with-weight/)
 
 ## 题目
 按权重随机选择
