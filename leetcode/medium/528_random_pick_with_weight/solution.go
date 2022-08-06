@@ -6,6 +6,7 @@ type Solution struct {
 	preSum []int
 }
 
+// Constructor 构造前缀和
 func Constructor(w []int) Solution {
 	n := len(w)
 	preSum := make([]int, n+1)
@@ -16,9 +17,12 @@ func Constructor(w []int) Solution {
 	return Solution{preSum}
 }
 
+// PickIndex 随机选择下标
 func (this *Solution) PickIndex() int {
 	n := len(this.preSum)
+	// 从preSum前缀和中随机选择一个元素preSum[0]排除 [1, preSum[n-1]]
 	target := rand.Intn(this.preSum[n-1]) + 1
+	// 二分查找第一个大于等于target的元素下标并-1 [1, preSum[n-1]]随机选择从1开始，故应减掉1
 	return binarySearch(this.preSum, target) - 1
 }
 
