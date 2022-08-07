@@ -16,7 +16,9 @@ func maxDepth(root *TreeNode, ans *int) int {
 	}
 	maxLeft := maxDepth(root.Left, ans)
 	maxRight := maxDepth(root.Right, ans)
+	// 动态root节点，计算ans
 	*ans = maxVal(maxLeft+maxRight, *ans)
+	// 返回最大深度，以左右子树深度最大值取得，考虑当前节点，故应加1
 	res := maxVal(maxLeft, maxRight) + 1
 	return res
 }
