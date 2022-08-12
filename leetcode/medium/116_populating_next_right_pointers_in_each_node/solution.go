@@ -34,3 +34,23 @@ func connect(root *Node) *Node {
 	}
 	return root
 }
+
+func connect2(root *Node) *Node {
+	if root == nil {
+		return nil
+	}
+	dfs(root)
+	return root
+}
+
+func dfs(root *Node) {
+	if root.Left == nil {
+		return
+	}
+	root.Left.Next = root.Right
+	if root.Next != nil {
+		root.Right.Next = root.Next.Left
+	}
+	dfs(root.Left)
+	dfs(root.Right)
+}

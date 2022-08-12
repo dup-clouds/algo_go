@@ -98,7 +98,7 @@ func newResultNode() *Node {
 	return node1
 }
 
-func Test_Problem116(t *testing.T) {
+func TestConnect1(t *testing.T) {
 
 	qs := []question116{
 		{
@@ -106,13 +106,26 @@ func Test_Problem116(t *testing.T) {
 			ans116{newResultNode()},
 		},
 	}
-
-	fmt.Printf("------------------------Leetcode Problem 116------------------------\n")
-
 	for _, q := range qs {
 		_, p := q.ans116, q.para116
 		fmt.Printf("【input】:%v      ", p.one)
 		fmt.Printf("【output】:%v      \n", connect(p.one))
+	}
+	fmt.Printf("\n\n\n")
+}
+
+func TestConnect2(t *testing.T) {
+
+	qs := []question116{
+		{
+			para116{newQuestionNode()},
+			ans116{newResultNode()},
+		},
+	}
+	for _, q := range qs {
+		_, p := q.ans116, q.para116
+		fmt.Printf("【input】:%v      ", p.one)
+		fmt.Printf("【output】:%v      \n", connect2(p.one))
 	}
 	fmt.Printf("\n\n\n")
 }
