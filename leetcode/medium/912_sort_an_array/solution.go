@@ -79,3 +79,57 @@ func partition(nums []int, low, high int) int {
 	nums[i], nums[high] = nums[high], nums[i]
 	return i
 }
+
+// sortArray3 冒泡排序
+func sortArray3(nums []int) []int {
+	for i := 0; i < len(nums); i++ {
+		flag := false
+		for j := 1; j < len(nums)-i; j++ {
+			if nums[j-1] > nums[j] {
+				nums[j], nums[j-1] = nums[j-1], nums[j]
+				flag = true
+			}
+		}
+		if !flag {
+			break
+		}
+	}
+	return nums
+}
+
+// sortArray4 选择排序
+func sortArray4(nums []int) []int {
+	for i := 0; i < len(nums)-1; i++ {
+		minIndex := i
+		minVal := nums[i]
+		for j := i + 1; j < len(nums); j++ {
+			if nums[j] < minVal {
+				minVal = nums[j]
+				minIndex = j
+			}
+		}
+		nums[minIndex], nums[i] = nums[i], nums[minIndex]
+	}
+	return nums
+}
+
+// sortArray5 插入排序
+func sortArray5(nums []int) []int {
+	// 待排序区间
+	for i := 1; i < len(nums); i++ {
+		// 待排序元素
+		val := nums[i]
+		// 从已排序区间末尾开始循环比较元素大小，并进行已排序区间元素后移
+		j := i - 1
+		for ; j >= 0; j-- {
+			if nums[j] > val {
+				nums[j+1] = nums[j]
+			} else {
+				break
+			}
+		}
+		// 循环减一后需加回去
+		nums[j+1] = val
+	}
+	return nums
+}
